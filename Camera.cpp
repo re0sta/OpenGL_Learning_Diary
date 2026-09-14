@@ -20,8 +20,9 @@ Camera::Camera(glm::vec3 cameraPos, float pitch, float yaw, glm::vec3 worldUp) {
 	Forward.x = cos(Pitch) * cos(Yaw);
 	Forward.y = sin(Pitch);
 	Forward.z = -cos(Pitch) * sin(Yaw);
-	Right = glm::cross(Forward, WorldUp);
-	Up = glm::cross(Right, Forward);
+	Forward = normalize(Forward);
+	Right = normalize(glm::cross(Forward, WorldUp));
+	Up =normalize( glm::cross(Right, Forward));
 }
 void Camera::cameraVectorUpdate(float xoffset, float yoffset) {
 	Pitch -= yoffset* sensitivity;
